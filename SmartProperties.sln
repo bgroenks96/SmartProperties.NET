@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartProperties", "SmartProperties\SmartProperties.csproj", "{C430B56E-5E75-48F6-A5BD-DC66BB05318B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartPropertiesTest", "SmartPropertiesTest\SmartPropertiesTest.csproj", "{F57C69F5-42A7-4715-B33B-135BB7B8DA03}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C430B56E-5E75-48F6-A5BD-DC66BB05318B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C430B56E-5E75-48F6-A5BD-DC66BB05318B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C430B56E-5E75-48F6-A5BD-DC66BB05318B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C430B56E-5E75-48F6-A5BD-DC66BB05318B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F57C69F5-42A7-4715-B33B-135BB7B8DA03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F57C69F5-42A7-4715-B33B-135BB7B8DA03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F57C69F5-42A7-4715-B33B-135BB7B8DA03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F57C69F5-42A7-4715-B33B-135BB7B8DA03}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
