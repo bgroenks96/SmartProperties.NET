@@ -1,18 +1,18 @@
 /*
  * MIT License
- * 
+ *
  * Copyright (c) 2017 Brian Groenke
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-﻿
+
 namespace SmartProperties
 {
     using System;
@@ -74,10 +74,10 @@ namespace SmartProperties
             return new PropertyModel(host, graph, onPropertyChanged);
         }
 
-		public void Dispose()
-		{
+        public void Dispose()
+        {
             this.host.PropertyChanged -= this.OnHostPropertyChanged;
-		}
+        }
 
         private void OnHostPropertyChanged(object sender, PropertyChangedEventArgs args)
         {
@@ -89,16 +89,16 @@ namespace SmartProperties
 
             try
             {
-				this.ignoreEvents = true;
-				PropertyGraph.PropertyNode node;
-				if (this.graph.TryGetValue(args.PropertyName, out node))
-				{
-					this.PropagatePropertyChanged(node);
-				}
+                this.ignoreEvents = true;
+                PropertyGraph.PropertyNode node;
+                if (this.graph.TryGetValue(args.PropertyName, out node))
+                {
+                    this.PropagatePropertyChanged(node);
+                }
             }
             finally
             {
-				this.ignoreEvents = false;
+                this.ignoreEvents = false;
             }
         }
 
@@ -123,12 +123,12 @@ namespace SmartProperties
                     continue;
                 }
 
-				closedSet.Add(next);
+                closedSet.Add(next);
                 this.FirePropertyChanged(next.Name);
                 foreach (var dependent in next.GetDependents().Where(d => !closedSet.Contains(d)))
-				{
-					visitQueue.Enqueue(dependent);
-				}
+                {
+                    visitQueue.Enqueue(dependent);
+                }
             }
         }
 

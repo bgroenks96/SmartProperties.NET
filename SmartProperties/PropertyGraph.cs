@@ -1,18 +1,18 @@
 /*
  * MIT License
- * 
+ *
  * Copyright (c) 2017 Brian Groenke
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-﻿
+
 namespace SmartProperties
 {
     using System;
@@ -46,10 +46,10 @@ namespace SmartProperties
         {
             var graph = new PropertyGraph();
             var allProperties = type.GetRuntimeProperties().ToList();
-			foreach (var dependent in allProperties.Where(HasAttribute))
-			{
+            foreach (var dependent in allProperties.Where(HasAttribute))
+            {
                 Initialize(dependent, graph, allProperties);
-			}
+            }
             return graph;
         }
 
@@ -64,7 +64,7 @@ namespace SmartProperties
         /// <param name="allProperties">All properties.</param>
         private static PropertyNode Initialize(PropertyInfo property, PropertyGraph graph, IList<PropertyInfo> allProperties)
         {
-			PropertyNode node;
+            PropertyNode node;
             if (graph.ContainsKey(property.Name))
             {
                 node = graph[property.Name];
@@ -73,32 +73,32 @@ namespace SmartProperties
             {
                 node = new PropertyNode(property.Name);
                 graph[property.Name] = node;
-				var dependencyAttr = property.GetCustomAttribute<DependsOnAttribute>();
-				if (dependencyAttr == null)
-				{
-					return node;
-				}
+                var dependencyAttr = property.GetCustomAttribute<DependsOnAttribute>();
+                if (dependencyAttr == null)
+                {
+                    return node;
+                }
 
-				foreach (var propName in dependencyAttr.Properties)
-				{
+                foreach (var propName in dependencyAttr.Properties)
+                {
                     var dependency = allProperties.FirstOrDefault(p => propName.Equals(p.Name));
-					if (dependency == null)
-					{
-						continue;
-					}
+                    if (dependency == null)
+                    {
+                        continue;
+                    }
 
-					var dependencyNode = Initialize(dependency, graph, allProperties);
-					dependencyNode.AddDependent(node);
-				}
+                    var dependencyNode = Initialize(dependency, graph, allProperties);
+                    dependencyNode.AddDependent(node);
+                }
             }
 
             return node;
         }
 
-		private static bool HasAttribute(PropertyInfo p)
-		{
-			return p.GetCustomAttributes().Any(a => a is DependsOnAttribute);
-		}
+        private static bool HasAttribute(PropertyInfo p)
+        {
+            return p.GetCustomAttributes().Any(a => a is DependsOnAttribute);
+        }
 
         public override string ToString()
         {
