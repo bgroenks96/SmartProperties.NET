@@ -22,12 +22,11 @@
  * SOFTWARE.
  */
 
-﻿
+
 namespace SmartPropertiesTest
 {
-	using NUnit.Framework;
-	using System;
-    using System.ComponentModel;
+    using NUnit.Framework;
+    using System;
 
     using SmartProperties;
     using System.Runtime.CompilerServices;
@@ -84,10 +83,10 @@ namespace SmartPropertiesTest
         }
 
         [Test]
-		public void TestPropertyModelInitFailsForSelfDependency()
-		{
+        public void TestPropertyModelInitFailsForSelfDependency()
+        {
             Assert.Throws<ArgumentException>(() => new IllegalType(), "expected exception for illegal self reference");
-		}
+        }
 
         private class TestType : NotifyPropertyChangedBase
         {
@@ -141,35 +140,35 @@ namespace SmartPropertiesTest
             // of C will be called as a result of a change to B. We include it here,
             // however, for testing purposes, to ensure that PropertyModel doesn't
             // dispatch the property change event multiple times to D.
-			[DependsOn(nameof(E), nameof(B), nameof(C))]
-			internal string D
-			{
-				get
-				{
-					return this.d;
-				}
+            [DependsOn(nameof(E), nameof(B), nameof(C))]
+            internal string D
+            {
+                get
+                {
+                    return this.d;
+                }
 
-				set
-				{
-					this.d = value;
-					this.OnPropertyChanged();
-				}
-			}
+                set
+                {
+                    this.d = value;
+                    this.OnPropertyChanged();
+                }
+            }
 
-			[DependsOn(nameof(D))]
-			internal string E
-			{
-				get
-				{
-					return this.e;
-				}
+            [DependsOn(nameof(D))]
+            internal string E
+            {
+                get
+                {
+                    return this.e;
+                }
 
-				set
-				{
-					this.e = value;
-					this.OnPropertyChanged();
-				}
-			}
+                set
+                {
+                    this.e = value;
+                    this.OnPropertyChanged();
+                }
+            }
 
             internal int CountA { get; private set; }
 
@@ -195,12 +194,12 @@ namespace SmartPropertiesTest
                     case nameof(C):
                         this.CountC++;
                         break;
-					case nameof(D):
-						this.CountD++;
-						break;
-					case nameof(E):
-						this.CountE++;
-						break;
+                    case nameof(D):
+                        this.CountD++;
+                        break;
+                    case nameof(E):
+                        this.CountE++;
+                        break;
                 }
             }
         }
